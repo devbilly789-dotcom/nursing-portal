@@ -106,9 +106,15 @@ USE_TZ = True
 
 
 # Static files (CSS, JS)
-
+# Static files (CSS, JS)
 STATIC_URL = '/static/'
+
+# Where your app keeps source static files (dev)
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+# Where collectstatic will put static files for production
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 
 # Login redirects
