@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-p62)z75$cuh&@8!&%_=%)928=0*l%51#^7m83@y&5gwzc2g3^1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['nursing-portal-2.onrender.com']
+ALLOWED_HOSTS = ['nursing-portal-3.onrender.com']
 
 
 # Application definition
