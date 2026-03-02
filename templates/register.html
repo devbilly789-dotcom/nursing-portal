@@ -1,0 +1,18 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<h2>NCK Revision Registration</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <select name="course" required>
+        <option value="BSN">BSN</option>
+        <option value="KRCHN">KRCHN</option>
+    </select>
+
+    <button type="submit">Register</button>
+</form>
+
+<a href="/login/">Login</a>

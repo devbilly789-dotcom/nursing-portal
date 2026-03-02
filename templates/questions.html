@@ -1,0 +1,16 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<h2>Revision Questions</h2>
+
+{% for question in questions %}
+<div class="card">
+    <h3>{{ question.question_text }}</h3>
+    <button onclick="document.getElementById('a{{question.id}}').style.display='block'">
+        View Answer
+    </button>
+    <p id="a{{question.id}}" style="display:none;">
+        {{ question.answer_text }}
+    </p>
+</div>
+{% endfor %}
