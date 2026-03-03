@@ -1,16 +1,66 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
-
-<h2>Revision Questions</h2>
-
-{% for question in questions %}
-<div class="card">
-    <h3>{{ question.question_text }}</h3>
-    <button onclick="document.getElementById('a{{question.id}}').style.display='block'">
-        View Answer
-    </button>
-    <p id="a{{question.id}}" style="display:none;">
-        {{ question.answer_text }}
-    </p>
-</div>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        .question-card {
+            background-color: #fff;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        .question-card p {
+            font-size: 16px;
+        }
+        .question-card button {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #17a2b8;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .question-card button:hover {
+            background-color: #117a8b;
+        }
+        .answer {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleAnswer(id){
+            const ans = document.getElementById(id);
+            ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</head>
+<body>
+    <h1>Your Questions</h1>
+    {% for q in questions %}
+        <div class="question-card">
+            <p><strong>Q{{ forloop.counter }}:</strong> {{ q.question_text }}</p>
+            <button type="button" onclick="toggleAnswer('ans{{ forloop.counter }}')">View Answer</button>
+            <p class="answer" id="ans{{ forloop.counter }}">{{ q.answer_text }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>
