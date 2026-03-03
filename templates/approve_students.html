@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Approve Students</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f0f4f8;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pending Approvals</h1>
+
+    {% for student in students %}
+        <div class="card">
+            <p><strong>Username:</strong> {{ student.user.username }}</p>
+            <p><strong>Course:</strong> {{ student.course }}</p>
+            <p><strong>MPESA Code:</strong> {{ student.mpesa_code }}</p>
+
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="student_id" value="{{ student.id }}">
+                <button type="submit">Approve</button>
+            </form>
+        </div>
+    {% empty %}
+        <p>No pending approvals.</p>
+    {% endfor %}
+</body>
+</html>
