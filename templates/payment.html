@@ -1,21 +1,70 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
-
-<h2>Monthly Subscription - 200 KES</h2>
-
-{% if waiting %}
-    <p style="color: green; font-size: 18px; text-align: center;">
-        Thank you! Your payment has been submitted.<br>
-        Waiting for admin approval...
-    </p>
-{% else %}
-    <p>1. Go to MPESA</p>
-    <p>2. Send money and enter 0114245222</p>
-    <p>3. Copy MPESA code and paste below</p>
-
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="mpesa_code" placeholder="Enter MPESA Code" required>
-        <button type="submit">Submit</button>
-    </form>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 450px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            margin: 12px 0;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 12px;
+            background-color: #ffc107;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment</h1>
+        <p>Instructions:</p>
+        <ol>
+            <li>Go to MPESA</li>
+            <li>Send KES 200 to 0114245222</li>
+            <li>Copy the MPESA code and paste it below:</li>
+        </ol>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="mpesa_code" placeholder="Enter MPESA code" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p>After submission, wait for admin approval.</p>
+    </div>
+</body>
+</html>
