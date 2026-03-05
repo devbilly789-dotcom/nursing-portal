@@ -11,6 +11,10 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 
 
+
+
+def home_view(request):
+    return render(request, 'home.html')
 # ==========================
 # REGISTER VIEW
 # ==========================
