@@ -1,19 +1,21 @@
-# nck_revision/settings.py
 import os
 from pathlib import Path
 
-# Load environment variables from .env locally
+# Load environment variables from .env locally (optional)
 # On Render, environment variables are set via the dashboard
 
-# Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ===============================
 # SECURITY
+# ===============================
 SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret-key")
 DEBUG = os.getenv("DEBUG") == "True"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "nursing-portal-12.onrender.com").split(",")
 
-# Application definition
+# ===============================
+# APPLICATION DEFINITION
+# ===============================
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -22,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Your App
+    # Your app
     'revision',
 ]
 
@@ -55,7 +57,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nck_revision.wsgi.application'
 
-# Database (SQLite)
+# ===============================
+# DATABASE (SQLite for now)
+# ===============================
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -63,7 +67,9 @@ DATABASES = {
     }
 }
 
-# Password validation
+# ===============================
+# PASSWORD VALIDATION
+# ===============================
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -71,29 +77,40 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
+# ===============================
+# INTERNATIONALIZATION
+# ===============================
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Africa/Nairobi'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# ===============================
+# STATIC FILES
+# ===============================
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Login redirects
+# ===============================
+# LOGIN/LOGOUT REDIRECTS
+# ===============================
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/login/'
 
-# Default primary key field type
+# ===============================
+# DEFAULT PRIMARY KEY FIELD TYPE
+# ===============================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ===============================
-# PayHero Configuration
+# PAYHERO CONFIGURATION
 # ===============================
 PAYHERO_AUTH_TOKEN = os.getenv("PAYHERO_AUTH_TOKEN")
 PAYHERO_ACCOUNT_ID = os.getenv("PAYHERO_ACCOUNT_ID")
 PAYHERO_CHANNEL_ID = int(os.getenv("PAYHERO_CHANNEL_ID", "5911"))
 PAYHERO_PROVIDER = os.getenv("PAYHERO_PROVIDER", "m-pesa")
-PAYHERO_CALLBACK_URL = os.getenv("PAYHERO_CALLBACK_URL", "https://yourdomain.com/callback")
+PAYHERO_CALLBACK_URL = os.getenv(
+    "PAYHERO_CALLBACK_URL",
+    "https://yourdomain.com/callback"
+)
