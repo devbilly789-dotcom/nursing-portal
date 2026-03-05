@@ -1,11 +1,9 @@
 # nck_revision/settings.py
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
 # Load environment variables from .env locally
 # On Render, environment variables are set via the dashboard
-load_dotenv()
 
 # Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent
