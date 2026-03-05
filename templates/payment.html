@@ -48,23 +48,28 @@
         button:hover {
             background-color: #e0a800;
         }
+        .error {
+            color: red;
+            margin-top: 12px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Payment</h1>
-        <p>Instructions:</p>
-        <ol>
-            <li>Go to MPESA</li>
-            <li>Send KES 200 to 0114245222</li>
-            <li>Copy the MPESA code and paste it below:</li>
-        </ol>
+        <h1>Pay School Fees</h1>
+        <p>Enter your phone number to pay via M-PESA:</p>
+
         <form method="post">
             {% csrf_token %}
-            <input type="text" name="mpesa_code" placeholder="Enter MPESA code" required>
-            <button type="submit">Submit</button>
+            <input type="text" name="phone" placeholder="e.g., 0712345678" required>
+            <button type="submit">Pay Now</button>
         </form>
-        <p>After submission, wait for admin approval.</p>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <p>After payment, you will be redirected to the waiting page for confirmation.</p>
     </div>
 </body>
 </html>
